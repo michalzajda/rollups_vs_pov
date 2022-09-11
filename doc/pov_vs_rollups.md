@@ -30,8 +30,9 @@ This is a document comparing Polkadot's PoV mechanism with Optimistic rollup tec
 		3. PoV is part of the protocol of the Relay Chain that was designed to share global security with 3rd party parachains in a decentralized way. It is used as meta information to validate parachain state in a stateless way. It is also used to provide fraud proofs
 		4. There is no direct equivalent of PoV in Rollups as PoV is a more generic protocol concept. It reaches deeper to the custom parachain to eventually provide finality of the consensus, avoid censorship and facilitate composing of a larger ecosystem of parachains
 		5. Rollups communicate with on-chain contracts with custom transactions that provide similar to PoV transitions. Yet, the reason to have the on-chain commitments is rather to prevent fraud. 
-		6. The advantage of Rollup is larger liquidity as on-chain rollup contract is almost equivalent to DEX
+		6. The advantage of Rollup is larger liquidity as on-chain rollup contract is almost equivalent to DEX and re-uses top level currency (eth) as collateral
 		7. The advantage of Parachain with PoV communication is build-in communication with another parachains and an attempt to standardize finality, which in turn motivate to extend ecosystem of parachains
 		8. Disadvantage of Rollups is much lower openness about inner workings of the protocol 
 		9. Disadvantage of Parachain is complexity of the protocol as it has to be more generic (e.g. cases like: validators are randomized but still can collude; forks may happen in Relay Chain, cause more protocol paths to be considered)
 		10. Interchain (cross parachain or between rollups) messaging is simpler with Polkadot as message hashes are secured in metadata along PoV and require yet another 3rd party to implement custom protocol.
+		11. Advantage of Rollup is narrow case - scalability solution. Eventually it leads to fast and cheap operations on the 3rd party rollup. 3rd party is responsible only for each subsystem. Top level chain doesn't interfere with it and is maintained by toplevel protocol team (Ethereum)
