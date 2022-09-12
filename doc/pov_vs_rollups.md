@@ -46,9 +46,10 @@ Above sections explain Polkadot's teminology: Collation > Availability > Approva
 
 1. There are two distinct layers of rollup architecture: on-chain contract and off-chain execution systems of the 3rd party
 2. Rollups are primarily built for scalability. It is achieved by offloading computation to the off-chain system. The on-chain part is for inheriting on-chain security guarantees in the off-chain world
-3. On-chain rollup contract is specifically written for the 3rd party use-case
-4. Every transition summary is re-run in the on-chain contract, so it's publicly available
-5. It can be contested using Proof of Fraud. In reality, to speed up withdrawals from the rollup contract larger entities re-run changes on their own, to be able to tell if the rollup is in the correct state. They don't need to wait for the PoF to allow a withdrawal then.
+3. On-chain rollup contract is specifically written for the 3rd party use-case. It is complex bridge contract which holds transaction data and communicates with outside world via Sequencer 
+4. Every transition summary is re-posted in calldata in the on-chain contract, so it's publicly available
+5. Users use APIs requiring merkle proofs to exit rollups. It is provided by Sequencers
+5. Rollup state can be contested using Proof of Fraud. In reality, to speed up withdrawals from the rollup contract larger entities re-run changes on their own, to be able to tell if the rollup is in the correct state. They don't need to wait for the PoF to allow a withdrawal then.
 
 #### Compare and Contrast
 Comparison of PoV and Rollups
@@ -62,8 +63,10 @@ Comparison of PoV and Rollups
 | Polkadot |  | Rollups | | 
 |---|---|---|---|
 | Good | Bad | Good | Bad |
-| PoV based protocol: build-in communication <br/> with another parachains and an attempt<br/> to standardize finality, which in turn motivate<br/> to extend ecosystem of parachains | |Can use top level assets for communication with outside world | Requires cooperation of two closed protocols to communicate. |
+|Cheap in Layer 1 because it's eventaully a blob || Cheap in Layer 1 because it's Calldata||
+| PoV based protocol: build-in communication <br/> with another parachains and an attempt<br/> to standardize finality, which in turn motivate<br/> to extend ecosystem of parachains | |Can use top level assets for communication with outside world | Rollup <-> Rollup requires cooperation of two closed protocols to communicate. |
 |||The advantage of Rollup is larger<br/> liquidity as on-chain rollup contract<br/> is almost equivalent to DEX and re-uses<br/> top level currency (eth) as collateral|
+|Users interact only with the parachain and don't know about Relay chain|||Users need to deal with bridge contract. We have extra complexity due to existance of a sequencer which mirros asset to Layer 2 rollup|
 ||||Disadvantage of Rollups is<br> much lower openness about<br> inner workings of a protocol |
 ||Disadvantage of Parachain is<br> complexity of the protocol as it<br> has to be more generic<br> (e.g. cases like: validators are randomized<br> but still can collude; forks may happen<br> in Relay Chain. It causes more protocol<br> paths to be considered)||
 |Interchain (cross parachain or between rollups)<br/> messaging is simpler with Polkadot<br/> as message hashes are secured in metadata<br/> along PoV and require yet another<br/> 3rd party to implement custom protocol|||
@@ -83,7 +86,7 @@ The main difference between PoV and Rollups protocols is that the first one focu
 |---|---|---|
 | Layer 1 | Relay Chain | e.g. Ethereum  |
 | Layer 2 (or local Layer 1s) | Parachain  | 3rd party Rollup  |
-| Fraud prevention  | Disputes/Fisherman | Proof of Fraud for OR |
-| Correctness | Backing | ZK proof |
+| Fraud prevention  | Disputes/Fisherman | Proof of Fraud / Verifier |
+| Correctness | Backing | (final) ZK proof (only ZKRollup) |
 | Finallity | Relay Chain | Ethereum | 
 | Block production | Collators | Private system |
