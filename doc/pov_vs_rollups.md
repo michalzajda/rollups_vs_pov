@@ -64,13 +64,13 @@ Comparison of PoV and Rollups
 |---|---|---|---|
 | Good | Bad | Good | Bad |
 |Cheap in Layer 1 because it's eventaully a blob || Cheap in Layer 1 because it's Calldata||
-| PoV based protocol: build-in communication <br/> with another parachains and an attempt<br/> to standardize finality, which in turn motivate<br/> to extend ecosystem of parachains | |Can use top level assets for communication with outside world | Rollup <-> Rollup requires cooperation of two closed protocols to communicate. |
-|||The advantage of Rollup is larger<br/> liquidity as on-chain rollup contract<br/> is almost equivalent to DEX and re-uses<br/> top level currency (eth) as collateral|
+| PoV based protocol: build-in communication with another parachains and an attempt to standardize finality, which in turn motivate to extend ecosystem of parachains | |Can use top level assets for communication with outside world | Rollup <-> Rollup requires cooperation of two closed protocols to communicate. |
+|||The advantage of Rollup is larger liquidity as on-chain rollup contract is almost equivalent to DEX and re-uses top level currency (eth) as collateral|
 |Users interact only with the parachain and don't know about Relay chain|||Users need to deal with bridge contract. We have extra complexity due to existance of a sequencer which mirros asset to Layer 2 rollup|
-||||Disadvantage of Rollups is<br> much lower openness about<br> inner workings of a protocol |
-||Disadvantage of Parachain is<br> complexity of the protocol as it<br> has to be more generic<br> (e.g. cases like: validators are randomized<br> but still can collude; forks may happen<br> in Relay Chain. It causes more protocol<br> paths to be considered)||
-|Interchain (cross parachain or between rollups)<br/> messaging is simpler with Polkadot<br/> as message hashes are secured in metadata<br/> along PoV and require yet another<br/> 3rd party to implement custom protocol|||
-|||Advantage of Rollup is narrow<br/> usecase - scalability solution.<br/> Eventually it leads to fast <br/>and cheap operations on the 3rd party rollup.<br/> 3rd party is responsible only for single subsystem.<br/> Top level chain doesn't interfere with it and is maintained by toplevel protocol team (Ethereum)||
+||||Disadvantage of Rollups is much lower openness about inner workings of a protocol |
+||Disadvantage of Parachain is complexity of the protocol as it has to be more generic (e.g. cases like: validators are randomized but still can collude; forks may happen in Relay Chain. It causes more protocol paths to be considered)||
+|Interchain (cross parachain or between rollups) messaging is simpler with Polkadot as message hashes are secured in metadata along PoV and require yet another 3rd party to implement custom protocol|||
+|||Advantage of Rollup is narrow usecase - scalability solution. Eventually it leads to fast and cheap operations on the 3rd party rollup. 3rd party is responsible only for single subsystem. Top level chain doesn't interfere with it and is maintained by toplevel protocol team (Ethereum)||
 |Having Parachain's runtime on Relay Chain is quite powerful idea. Especially it's WASM upgradable code. There is no dependency on top level chain (Ethereum) VM|||Rollups depend on capabilities of the top level chain |
 |||Rollup team may focus only on local buisness logic. It may improve productivity.||
 
