@@ -46,7 +46,7 @@ Above sections explain Polkadot's teminology: Collation > Availability > Approva
 
 1. There are two distinct layers of rollup architecture: on-chain contract and off-chain execution systems of the 3rd party
 2. Rollups are primarily built for scalability. It is achieved by offloading computation to the off-chain system. The on-chain part is for inheriting on-chain security guarantees in the off-chain world
-3. On-chain rollup contract is specifically written for the 3rd party use-case. It is complex bridge contract which holds transaction data and communicates with outside world via Sequencer 
+3. On-chain rollup contract is specifically written for the 3rd party use-case. It is complex bridge contract which holds transaction data and communicates with outside world via Sequencer node
 4. Every transition summary is re-posted in calldata in the on-chain contract, so it's publicly available
 5. Users use APIs requiring merkle proofs to exit rollups. It is provided by Sequencers
 5. Rollup state can be contested using Proof of Fraud. In reality, to speed up withdrawals from the rollup contract larger entities re-run changes on their own, to be able to tell if the rollup is in the correct state. They don't need to wait for the PoF to allow a withdrawal then.
@@ -68,7 +68,7 @@ Comparison of PoV and Rollups
 |||The advantage of Rollup is larger liquidity as on-chain rollup contract is almost equivalent to DEX and re-uses top level currency (eth) as collateral|
 |Users interact only with the parachain and don't know about Relay chain|||Users need to deal with bridge contract. We have extra complexity due to existance of a sequencer which mirros asset to Layer 2 rollup|
 ||||Disadvantage of Rollups is much lower openness about inner workings of a protocol |
-||Disadvantage of Parachain is complexity of the protocol as it has to be more generic (e.g. cases like: validators are randomized but still can collude; forks may happen in Relay Chain. It causes more protocol paths to be considered)||
+||Disadvantage of Parachain is complexity of the protocol as it has to be more generic (e.g. cases like: validators are randomized but still can collude; forks may happen in Relay Chain. It causes more protocol paths to be considered)|| Reputation based security depending on Sequencer node. Not standardized redundancy. |
 |Interchain (cross parachain or between rollups) messaging is simpler with Polkadot as message hashes are secured in metadata along PoV and require yet another 3rd party to implement custom protocol|||
 |||Advantage of Rollup is narrow usecase - scalability solution. Eventually it leads to fast and cheap operations on the 3rd party rollup. 3rd party is responsible only for single subsystem. Top level chain doesn't interfere with it and is maintained by toplevel protocol team (Ethereum)||
 |Having Parachain's runtime on Relay Chain is quite powerful idea. Especially it's WASM upgradable code. There is no dependency on top level chain (Ethereum) VM|||Rollups depend on capabilities of the top level chain |
@@ -86,7 +86,7 @@ The main difference between PoV and Rollups protocols is that the first one focu
 |---|---|---|
 | Layer 1 | Relay Chain | e.g. Ethereum  |
 | Layer 2 (or local Layer 1s) | Parachain  | 3rd party Rollup  |
-| Fraud prevention  | Disputes/Fisherman | Proof of Fraud / Verifier |
-| Correctness | Backing | (final) ZK proof (only ZKRollup) |
+| Fraud prevention  | Disputes | Proof of Fraud / Verifier |
+| Correctness | Backing / Secondary Check | (final) ZK proof (only ZKRollup) |
 | Finallity | Relay Chain | Ethereum | 
 | Block production | Collators | Private system |
